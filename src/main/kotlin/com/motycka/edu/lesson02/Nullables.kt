@@ -1,24 +1,26 @@
 package com.motycka.edu.lesson02
 
-fun brewCoffee(coffeeGrams: Double, waterMl: Double, milkMl: Double?, sugarGrams: Double?): String {
-    // Determine if coffee is black or with milk
-    val milkDescription = if (milkMl != null && milkMl > 0) "with milk" else "black"
-
-    // Determine if coffee is sweetened or unsweetened
-    val sugarDescription = if (sugarGrams != null && sugarGrams > 0) "sweetened" else "unsweetened"
-
-    // Format the return string
-    return "Coffee ($coffeeGrams g, $waterMl ml) $milkDescription $sugarDescription"
-}
-
 fun main() {
-    // Example usage of brewCoffee function
-    val coffee1 = brewCoffee(coffeeGrams = 10.0, waterMl = 200.0, milkMl = null, sugarGrams = null)
-    println(coffee1)
+    val name: String = "John"               // cannot be null
+    val nullableName: String? = null         // can be null
 
-    val coffee2 = brewCoffee(coffeeGrams = 15.0, waterMl = 250.0, milkMl = 50.0, sugarGrams = 5.0)
-    println(coffee2)
+    val lengthOrNull: Int? = nullableName?.length
+    println("Length of nullableName (safe call): \$lengthOrNull")
 
-    val coffee3 = brewCoffee(coffeeGrams = 20.0, waterMl = 300.0, milkMl = null, sugarGrams = 10.0)
-    println(coffee3)
+    val safeLength: Int = nullableName?.length ?: 0
+    println("Length of nullableName (Elvis default): \$safeLength")
+
+    try {
+        val assertedLength = nullableName!!.length
+        println("Length via not-null assertion: \$assertedLength")
+    } catch (e: NullPointerException) {
+        println("Caught NPE from not-null assertion: \${e.message}")
+    }
+
+    val upper: String? = nullableName?.uppercase()
+    println("Uppercase of nullableName: \$upper")
+
+    val actualName: String? = "Alice"
+    println("ActualName uppercase: \${actualName?.uppercase() ?: "UNKNOWN"}")
 }
+// I hopefully anticipate it to pass the requirements
