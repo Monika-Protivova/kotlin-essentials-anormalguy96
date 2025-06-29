@@ -1,11 +1,23 @@
 package com.motycka.edu.lesson04
 
-class TemperatureConverter {
+import io.github.oshai.kotlinlogging.KotlinLogging
+
+private val logger = KotlinLogging.logger { }
+
+object TemperatureConverter {
     fun toCelsius(fahrenheit: Double): Double {
-        return (fahrenheit - 32) * 5.0 / 9.0
+        logger.info { "Converting $fahrenheit Fahrenheit to Celsius" }
+        return (fahrenheit - 32) * 5 / 9
+    }
+    fun toFahrenheit(celsius: Double): Double {
+        logger.info { "Converting $celsius Celsius to Fahrenheit" }
+        return celsius * 9 / 5 + 32
     }
 
-    fun toFahrenheit(celsius: Double): Double {
-        return celsius * 9.0 / 5.0 + 32
-    }
+}
+
+
+fun main() {
+    TemperatureConverter.toFahrenheit(34.0).also(::println)
+    TemperatureConverter.toCelsius(94.0).also(::println)
 }
